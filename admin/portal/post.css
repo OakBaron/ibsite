@@ -1,0 +1,126 @@
+/* ------------- Global post ------------- */
+.container{
+    width: 60%;
+    margin: 2% auto 0 auto;
+    color: #333;
+    background-color: white;
+    margin-bottom: 2em;
+    border-radius: 0.2em;
+    padding: 1em 2em;
+    line-height: 1.3em;
+}
+.container>*{
+    border-radius: 0.3em;
+}
+/* General forum stuff */
+.forumLink{
+    text-decoration: none;
+}
+
+
+/* ------------- Post ------------- */
+/* Title, username, time posted */
+.title>h2{
+    margin: 0.5em 0;
+    line-height: 1.2em;
+}
+.info>*{
+    font-size: 0.75em;
+    color: #aaa;
+    margin: 0;
+    display: inline-block;
+}
+.userlink:hover, .postType:hover{
+    text-decoration: underline;
+}
+.postType{
+    color: #888;
+    font-weight: bold;
+    margin: 0 0.5em 0 0.2em;
+}
+/* Text and image */
+.content>p{
+    margin: 0;
+}
+.forum.card{
+    margin-bottom: 1em;
+}
+.postImage{
+    margin-top: 1em;
+    width: 100%;
+    border-radius: 0.3em;
+}
+.postDocPreview{
+    margin-top: 1em;
+    width: 100%;
+    border-radius: 0.2em;
+    border: 1px solid #999;
+    height: 50vh;
+}
+#show:hover, #hide:hover{
+    cursor: pointer;
+}
+#hideImgs{
+    display: none;
+}
+#hideImgs ~ #hide{
+    display: block;
+}
+#hideImgs ~ #show{
+    display: none;
+}
+#hideImgs:checked ~ #hide{
+    display: none;
+}
+#hideImgs:checked ~ #show{
+    display: block;
+}
+#hideImgs ~ label{
+    margin-top: 2em;
+    color: #00d09f;
+    text-align: center;
+    font-size: 0.9em;
+    margin-bottom: 0;
+}
+#hideImgs:checked ~ .toggleView{
+    display: none;
+}
+
+/* Fixing tag-padding issue 
+.tags>p{
+    padding: 0em 0.5em;
+}*/
+/* Reporting and saving */
+.postBottom{
+    display: block;
+    height: 1.5em;
+    font-size: 1em;
+    padding: 0 1em;
+    display: grid;
+    align-content: center;
+    grid-template-columns: 1fr 1fr;
+}
+.postReport, .postActions{
+    margin: 0;
+    font-size: 0.8em;
+    color: #999;
+}
+.postReport{
+    color: #922;
+    text-decoration: none;
+}
+.postActions>a{
+    color: #888;
+    text-decoration: none;
+}
+.postActions>a:hover,.postReport:hover{
+    text-decoration: underline;
+}
+.postSave{
+    color: inherit;
+    text-decoration: none;
+    float: right;
+}
+.postSave>*{
+    float: right;
+}

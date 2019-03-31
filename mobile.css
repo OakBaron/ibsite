@@ -1,0 +1,202 @@
+/* ---------- Mobile CSS ---------- */
+/**
+ * 
+ * The method used to move elements is to use a media query to hide the element,
+ * and another media query to show one. This is basically a toggle.
+ * 
+**/
+.mobileOnly{
+    display: none;
+}
+
+@media (max-width: 1000px){
+  .mobileOnly{
+      display: block !important;
+      width: 90vw;
+      margin: 1em auto !important;
+  }
+  #monoContainer{
+      margin-top: 3em;
+  }
+  #container{
+      margin-top: 5vw !important;
+      display: block;
+      width: 100%;
+  }
+  #container.keepRight{
+      display: grid !important;
+  }
+  #container>#left{
+      width: 90vw;
+      margin-left: auto;
+      margin-right: auto;
+  }
+  #right{
+      display: none;
+  }
+  .keepRight>#right{
+      display: block;
+  }
+  #results, #monoContainer{
+      width: 85vw !important;
+      margin-left: auto;
+      margin-right: auto;
+  }
+  .card{
+      margin-bottom: 1em;
+  }
+  
+  
+  #top{
+      display: none;
+  }
+  #topMobile{
+      display: grid;
+      grid-template-columns: 1fr 3fr 1fr;
+      width: 100%;
+      text-align: center;
+      height: 2.1em;
+      align-items:center;
+      padding: 2% 0;
+      margin: 0 auto;
+      background-color: white;
+      position: fixed;
+      top: 0;
+      z-index: 2;
+      box-shadow: 0 1px 2px #ddd;
+      text-align: center;
+      align-items: middle;
+  }
+  #topMobile>a{
+      margin-left: auto;
+      margin-right: auto;
+  }
+  #logoMobile{
+      height: 2em;
+  }
+  .hamburger{
+      width: 2em;
+      filter: opacity(0.7);
+  }
+  .hamburger:hover{
+      cursor: pointer;
+  }
+  /*Actual checkbox toggle*/
+  #hamCheck{
+      display: none;
+  }
+  #hamCheck:checked ~ p{
+      color: red;
+  }
+  
+  #leftMobile{
+      position: fixed;
+      top: 0;
+      left: -82vw;
+      z-index: 999;
+      padding-top: 5vh;
+      background-color: white;
+      width: 80vw;
+      height: 100vh;
+      align-items: middle;
+      text-align: center;
+      box-shadow: 1px 0 2px #ddd;
+      transition-duration: 100ms;
+      overflow-y: auto;
+  }
+  #hamCheck:checked ~ #leftMobile{
+      left: 0;
+  }
+  #hamCheck:checked ~ #leftMobile>label>#hamburgerInLeft{
+      display: block;
+      position: fixed;
+      left: calc(80vw - 2.6em);
+      top: 4vh;
+      filter: opacity(0.6);
+      transition: 200ms;
+  }
+  #leftMobile>#right>.card{
+      box-shadow: none;
+      padding: 0.5em;
+      width: 70%;
+      margin: 0 auto;
+  }
+  #leftMobile>#right>.card:last-of-type{
+      margin-bottom: 100px;
+  }
+  #accountMobile{
+      border-radius: 50%;
+      width: 35%;
+  }
+  #searchMobile{
+      width: calc(70% - 20px);
+      margin: 0 auto;
+      color: #444;
+  }
+  #searchBarMobile{
+      width: 95%;
+      font-size: 1em;
+      background-color: #f4f4f4;
+      border: 0;
+      padding: 5px 10px;
+      border-radius: 0.3em;
+  }
+  #searchBarMobile::-webkit-input-placeholder {
+      color: #999 !important;
+  }
+  #searchBarMobile:-moz-placeholder { /* Firefox 18- */
+      color: #999 !important;  
+  }
+  #searchBarMobile::-moz-placeholder {  /* Firefox 19+ */
+      color: #999 !important;  
+  }
+  #searchBarMobile:-ms-input-placeholder {  
+      color: #999 !important;  
+  }
+  #searchFormMobile{
+      width: 100%;
+  }
+  /* Add post button */
+  #addPostMobile{
+      cursor: pointer;
+      margin: 1em auto;
+      border-radius: 0.3em;
+      width: 70%;
+      font-size: 1.2em;
+  }
+  #addPostMobile>a{
+      color: #00d09f;
+      display: block;
+      text-decoration: none;
+      padding: 0.5em 1em;
+ }
+  #addPostMobile:hover{
+      background-color: #f4f4f4;
+  }
+  
+  /* User page posts/saved thing */
+  #userTopWrapper{
+      box-shadow: 0 2px 3px #ddd !important;
+      top: 0.1em;
+      z-index: 3;
+  }
+  
+  /* For the /forum/post s */
+  .container{
+      margin: 5vh auto !important;
+      width: 90vw !important;
+      max-width: 100%;
+      padding: 0 !important;
+  }
+  #content>p>img{
+      width: 100%;
+  }
+  #comments{
+      padding-top: 1em;
+  }
+}
+@media (min-width: 1001px){
+    .mobile{
+      display: none;
+    }
+}

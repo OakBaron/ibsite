@@ -1,0 +1,80 @@
+/*
+ The use of !important is out of sheer laziness. To fix, just create two css
+ documents, one for light theme and one for dark. Until then, this will have to
+ work.
+*/
+
+body{
+    background-color: #090909 !important;
+    color: #ccc !important;
+}
+#leftMobile{
+    background-color: #090909 !important;
+}
+.hamburger{
+    filter: invert(25%) !important;
+}
+#topMobile{
+    background-color: #090909 !important;
+}
+msg{
+    background-color: #0d0d0d !important;
+    color: #bcbcbc !important;
+    border: 1px solid #242424 !important;
+}
+
+#top, #topMobile, #userTopWrapper{
+    background-color: #090909 !important;
+    box-shadow: none !important;
+    border-bottom: 1px solid #242424 !important;
+}
+input[type=text]{
+    border: 0 !important;
+    border-bottom: 1px solid #ccc !important;
+    background-color: transparent;
+    color: #bcbcbc;
+}
+#searchBar, #searchBarMobile, textarea, #postEditor{
+    background-color: #1a1919 !important;
+    border: 0 !important;
+    color: #bcbcbc;
+}
+#addPost:hover, #addPostMobile:hover{
+    background-color: #1a1919 !important;
+}
+
+#postEditor{
+    border-radius: 0 !important;
+}
+.userTopSel{
+    color: inherit !important;
+}
+
+#commentWriter{
+    border: 1px solid #626262 !important;
+    color: inherit !important;
+}
+#commentWriterButtons, #commentEditor{
+    background-color: #0b0b0b !important;
+}
+#commentSubmitButton{
+    background-color: #111 !important;
+}
+
+.card{
+    background-color: #0b0b0b !important;
+    color: #bcbcbc !important;
+    box-shadow: none !important;
+}
+.card:hover:not(.noShadow):not(.noHover){
+    box-shadow: none !important;
+    border: 1px solid #626262 !important;
+}
+.card:not(.noShadow){
+    border: 1px solid #242424 !important;
+    box-shadow: none !important;
+}
+
+button[type="submit"]:not(#commentSubmitButton){
+    background-color: #111;
+}

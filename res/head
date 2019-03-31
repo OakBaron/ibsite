@@ -1,0 +1,23 @@
+<head>
+    <meta charset=UTF-8>
+    <title>IB Forum</title>
+    <link rel=stylesheet type=text/css href=/style.css>
+    <link rel=stylesheet type=text/css href=/mobile.css>
+    <?php
+      if(getUserInfo($current_user)->dark_theme){
+        echo "<link rel=stylesheet type=text/css href=/darkTheme.css>";
+      }
+    ?>
+    <link rel=stylesheet type=text/css href=<?php echo isset($css)?$css:"/unset"; ?>.css>
+    <link rel=stylesheet type=text/css href=<?php echo isset($css2)?$css2:"/unset"; ?>.css>
+    <link rel="icon" href="/res/i/favicon.png">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <?php
+      if(getUserInfo($current_user)->snow){
+        echo "<script src=/res/snowstorm.js></script>";
+      }
+    ?>
+    <meta name="google-signin-client_id" content="107876463917-vju8u1c0m5ceu00v92ejim138gae7ktb.apps.googleusercontent.com">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>

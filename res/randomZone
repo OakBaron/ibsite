@@ -1,0 +1,64 @@
+  <div class="card noHover">
+    <h3 class=notifTitle>RANDOM ZONE</h3>
+    <p>
+      <?php
+        $randomArray = [
+        "You look nice today.", 
+        "You're doing a great job.", 
+        "I hope you're having a good day! You deserve it.", 
+        "Your friends are all rooting for you.", 
+        "Ever noticed that the search bar's words change?", 
+        "I bet giraffes' coffee is cold by the time it gets to its stomach.", 
+        "I saw some guy walking around with a duck the other day.", 
+        "This site is user-based; make sure you contribute!", 
+        "Ever considered buying a boat?", 
+        "We should all go ice-skating over winter break, that would be fun.", 
+        "Remember to take a breath every once in a while.", 
+        "School isn't everything. Take care of yourself.", 
+        "The surface area of an average-sized brick is 79 cm squared.", 
+        "Despite what Mrs. Trickett says, the mitochondria IS the powerhouse of the cell.", 
+        "ATLEE stands for All Trees Like Eating Eggs.", 
+        "I heard that someone has a crush on ".str_replace(str_split(-_), " ", getUserInfo($current_user)->name), 
+        "Left handed people tend to be more artistic.", 
+        "I hope you're not going to leave this site... that literally kills me, you know.", 
+        "Ctrl (or cmd on Mac) + Shift + T reopens your last closed tab.", 
+        "Aliens probably don't go to school.", 
+        "^-^", 
+        "Edelman has a Keurig you can use.", 
+        "Does Santa know when I procrastinate?", 
+        "You're in a coma.<br>We're trying a new technique to get to you.<br>Please wake up.<br>We miss you.", 
+        "The patent for toilet paper shows it going over, not under.", 
+        "Luke Ogburn carries mints in his backpack. Just ask and he'll give you one!", 
+        "Someone ate my pringes :(",
+        "What if time goes backwards, but we just don't notice because our memories rewind too.",
+        "You seem like a nice person.",
+        "The school's layout is based off of that of a prison's.",
+        "Text someone you like and tell them why you like them. They'll appreciate it.",
+        "Rice isn't that hard to cook.",
+        "I wonder if there are any secret passages in the school.",
+        "Pineapples have neither pines nor apples in them.",
+        "Fear is information, don't ignore it.",
+        "If you're hungry, then eat.",
+        "If you're thirsty, then drink",
+        "Give yourself time. Butterflies don't form in a day.",
+        "Ask yourself: What would make me happy today?",
+        "Beauty shouldn't be pain. Being comfortable will make you happy, which will make you beautiful.",
+        "The more people use this site, the better it becomes.",
+        "Onions don't cry when they chop humans.",
+        "Never trust a plastic hippo.",
+        "Tabs are just capital spaces.",
+        "The very existence of socks is proof that shoes don't work.",
+        "Humans are the only creatures who care about time. Maybe it doesn't matter as much as we think it does.",
+        "People like you.",
+        "Chicken is better than turkey and you can't change my mind.",
+        "You look great today.",
+        "People are happy when you're happy, because they like you and want you to succeed in life.",
+        "In dog years, humans regularly live to 800+ years old. They probably think we're immortal or something.",
+        "If tipping were illegal, wait staff would be paid more and wouldn't neet tips in the first place.",
+        "I, for one, think that you're a good person."
+        ];
+        $randomArray = array_filter($randomArray);
+        echo $randomArray[mt_rand(0, sizeof($randomArray)-1)];
+      ?>
+    </p>
+  </div>

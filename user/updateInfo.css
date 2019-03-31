@@ -1,0 +1,80 @@
+html, body{
+    height: calc(100% - 1em);
+    /* Allows the body content be centered vartically.
+       No idea why the "-1em" part matters, but it does and it works so don't touch it unless you are willing to see the proccess through
+    */
+}
+#midtainer{
+    display: flex;
+    height: calc(100% - 2em - 4%);
+    /* 100% - top bar thing */
+    align-items: center;
+    justify-content: center;
+}
+#updateCard{
+    display: inline-block;
+    padding: 2em 4em;
+    margin: 5% auto;
+    text-align: center;
+}
+.question{
+    font-size: 1.1em;
+    margin-top: 2em;
+    margin-bottom: 0.7em;
+}
+select{
+    padding: 0.3em 2em;
+    align-items: center;
+    justify-content: center;
+    background-color: #eee;
+    border: none;
+    outline-width: 0;
+    font-size: 0.9em;
+}
+option{
+    text-align: center;
+}
+form>label:not(.sideBySide){
+    margin-left: auto;
+    margin-right: auto;
+}
+form>label:not(.sideBySide){
+    display: block;
+}
+.sideBySide{
+    display: inline;
+}
+.sideBySide:not(:last-of-type){
+    margin-right: 1%;
+}
+input[type=checkbox], input[type=radio]{
+    display: none;
+}
+.tagLabel{
+    display: inline-block;
+}
+label:not(:last-of-type){
+    margin-bottom: 0.3em;
+}
+input[type=checkbox]:checked+label, input[type=radio]:checked+label{
+    color: #00d09f;
+}
+input[type=text]:not(#searchBar){
+    border: none;
+    border-bottom: 1px solid black;
+    outline-width: 0;
+    text-align: center;
+    font-size: 1em;
+    margin-bottom: calc(1em + 1px);
+}
+button[type=submit]{
+    font-size: 1em;
+    background-color: white;
+    color: #00d09f;
+    border: 1px solid #00d09f;
+    padding: 0.5em 1em;
+    margin-top: 2em;
+}
+label:hover, button:hover{
+    cursor: pointer;
+}

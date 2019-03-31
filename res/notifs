@@ -1,0 +1,93 @@
+<?php
+  if(isset($_GET["del"])&&verifyUser("admin")){
+    conn();
+    $stmt = $conn->prepare("DELETE FROM notices WHERE id = :id");
+    $stmt->bindParam(":id", $_GET["del"]);
+    $stmt->execute();
+    header("Location: /forum");
+  }
+  
+  if(isset($_POST["notif"])&&verifyUser("admin")){
+    conn();
+    $stmt = $conn->prepare("INSERT INTO notices (text) VALUES (:text)");
+    $stmt->bindParam(":text", $_POST["notif"]);
+    $stmt->execute();
+    unset($_POST["notif"]);
+    header("Location: /forum");
+  }
+?>
+<div id=right>
+  <div class="card noHover">
+    <h3 class=notifTitle>NOTIFS</h3>
+    <p>
+      <?php
+        conn();
+        $stmt = $conn->prepare("SELECT * FROM notices ORDER BY id DESC");
+        $stmt->execute();
+        $notices = $stmt->fetchAll();
+        foreach($notices as $notice){
+            if(verifyUser("admin")){
+                $notice = "<p class=notif><a class=deletable href=?del=".$notice['id'].">".$notice["text"]."</a></p>";
+            }else{
+                $notice = "<p>".$notice["text"]."</p>";
+            }
+            echo $notice;
+        }
+        if($notices==NULL){
+            echo "<i>No notifs.</i>";
+        }
+      ?>
+    </p>
+  </div>
+  <div class="card noHover">
+    <h3 class=notifTitle>MENTIONS</h3>
+    <p>
+      <?php
+        conn();
+        $stmt = $conn->prepare("SELECT * FROM alerts WHERE mentionee = :cu ORDER BY id ASC");
+        $stmt->bindParam(":cu", $current_user);
+        $stmt->execute();
+        $alerts = $stmt->fetchAll();
+        foreach($alerts as $alert){
+            echo "<a class=alert href=/forum/post/?a=".$alert['id']."&post=".$alert['post_id']."#".$alert['id'].">".getUserInfo($alert['mentioner'])->name." mentioned you</a>";
+        }
+        if($alerts==NULL){
+          echo "<i>No mentions</i>";
+        }
+      ?>
+    </p>
+  </div>
+  <?php
+    if(verifyUser("admin")){
+      //Reported posts
+      echo "<div class='card noHover'>
+      <h3 class=norifTitle>REPORTED POSTS</h3>
+      ";
+      conn();
+      $stmt = $conn->prepare("SELECT * FROM forums WHERE reports IS NOT NULL");
+      $stmt->execute();
+      $res = $stmt->fetchAll();
+      foreach($res as $post){
+        $times = substr_count($post["reports"], ",");
+        $times = $times==1?"1 time":"$times times";
+        echo "<p><a class=noStyle href=/admin/portal/reportedPost.php?post=".$post['post_id'].">Post ".$post["post_id"]." has been reported $times</a></p>";
+      }
+      if(count($res)==0){
+        echo "<p><i>Nothing has been reported.</i></p>";
+      }
+      echo "</div>";
+      
+      //Adding notifs
+      echo"\n<div class='card noHover'>
+        <h3 class=notifTitle>ADD NOTIFS</h3>
+        <form method=POST action='' style='width:100%;'>
+          <input id=notifAdder type=text name=notif placeholder='Press enter to submit' style=color:inherit>
+        </form>
+        <br>
+        <h3 class=notifTitle>DELETE NOTIFS</h3>
+        <p id=notifAdminMsg>You can delete any notif by clicking on it. Keep in mind that once you click it, it's gone forever. Don't delete something if you aren't sure it should be deleted!<br><br>
+        Make sure notifs apply to everyone!</p>
+      </div>";
+    }
+    ?>
+</div>

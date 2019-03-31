@@ -1,0 +1,57 @@
+html, body{
+    height: calc(100% - 1em);
+    /* Allows the body content be centered vartically.
+       No idea why the "-1em" part matters, but it does and it works so don't touch it unless you're willing to see the bug through
+    */
+}
+#updateCard{
+    display: inline-block;
+    padding: 2em 4em;
+    margin: 0 auto 10% auto;
+    text-align: center;
+    width: 35%;
+}
+.question{
+    font-size: 1.1em;
+    margin-top: 2em;
+    margin-bottom: 0.7em;
+}
+/* Something's wrong here */
+form>*{
+    margin-left: auto;
+    margin-right: auto;
+}
+#instructions{
+    width: 90%;
+    margin: 1em auto;
+}
+#another{
+    color: #00d09f;
+    text-decoration: none;
+}
+#another:hover{
+    text-decoration: underline;
+}
+button[type=submit]{
+    font-size: 1em;
+    background-color: white;
+    color: #00d09f;
+    border: 1px solid #00d09f;
+    padding: 0.5em 1em;
+    margin-top: 2em;
+}
+h2{
+    margin-top: 0;
+}
+textarea{
+    outline-width: 0;
+    font-family: inherit;
+    font-size: 0.9em;
+    resize: none;
+    width: 90%;
+    border: 1px solid #bbb;
+    border-radius: 0.3em;
+    padding: 0.3em 0.5em;
+    color: #333;
+    font-size: 1em;
+}

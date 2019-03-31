@@ -1,0 +1,49 @@
+<?php
+  $searchArrayMobile = ["Search", "Looking for something?", "Hey, a search bar!"];
+  $searchArray = ["You can search all posts and questions here", "Looking for something specific?", "Type 'history:' before your search to narrow it down to one class", "Looking for something?", "Search for what you need", "Oh look, there's a search bar", "Don't do a search now, I'm sleeping (zzz)"];
+  $searchPlaceholder = "\"".$searchArray[array_rand($searchArray)]."\"";
+  $searchPlaceholderMobile = "\"".$searchArrayMobile[array_rand($searchArrayMobile)]."\"";
+?>
+
+<div id=topSpacer></div>
+<div id=top>
+  <a id=logoLink href="/"><img id=logo src="/res/i/logo.png"></a>
+  <div id=search>
+    <form id=searchForm method=GET action=/search>
+      <input placeholder=<?=$searchPlaceholder?> id=searchBar type=text autocomplete=off name=q value=<?=isset($_GET["q"])?"\"".htmlspecialchars($_GET["q"])."\"":"";?>>
+    </form>
+  </div>
+  <div id=addPost class=noSelect><a href="/post">+ Post</a></div>
+  <a id=accountWrapper href=<?php echo $verified?"/user/?user=".$current_user:"/user/login.php"; ?>>
+    <img id=account src=<?php echo $verified?getUserInfo($current_user)->image_url:"/res/i/user.png"; ?>>
+  </a>
+</div>
+
+<!-- Mobile -->
+<input id=hamCheck type=checkbox style=display:none>
+<div id=topMobile class=mobile>
+  <div id=mobileMenu><label for=hamCheck><img class=hamburger src=/res/i/ham.png></label></div>
+  <a id=logoLinkMobile href="/"><img id=logoMobile src="/res/i/logo.png"></a>
+  <div id=topMobileSpacer></div>
+</div>
+
+<div id=leftMobile class='mobile keepRight'>
+  <label for=hamCheck><img id=hamburgerInLeft class=hamburger src=/res/i/ham.png></label>
+  <a id=accountWrapperMobile class=noStyle href=<?php echo $verified?"/user/?user=".$current_user:"/user/login.php"; ?>>
+    <img id=accountMobile src=<?php echo $verified?getUserInfo($current_user)->image_url:"/res/i/user.png"; ?>>
+    <h2><?=getUserInfo($current_user)->name?></h2>
+  </a>
+  <div id=searchMobile>
+    <form id=searchFormMobile method=GET action=/search>
+      <input placeholder=<?=$searchPlaceholderMobile?> id=searchBarMobile type=text autocomplete=off name=q value=<?=isset($_GET["q"])?"\"".htmlspecialchars($_GET["q"])."\"":"";?>>
+    </form>
+  </div>
+  <div id=addPostMobile class=noSelect><a href="/post">+ Post</a></div>
+  <?php include $_SERVER['DOCUMENT_ROOT']."/res/notifs"; ?>
+</div>
+
+<?php
+  if($msg != NULL){
+    echo "<msg class=neutral>".$msg."</msg>";
+  }
+?>

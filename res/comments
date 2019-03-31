@@ -1,0 +1,131 @@
+<?php
+  //deleting and reporting comments are in the actual post in order to be able to give the affirmative or negative msg on completion or error
+  
+  $stmt = $conn->prepare("SELECT * FROM comments WHERE post_id = :pid ORDER BY date ASC");
+  $stmt->bindParam(":pid", $_GET["post"]);
+  $stmt->execute();
+  $row = $stmt->fetchAll();
+  
+  if(isset($_GET["a"])){
+    conn();
+    $stmt = $GLOBALS['conn']->prepare("SELECT * FROM alerts WHERE id = :id");
+    $stmt->bindParam(":id", $_GET["a"]);
+    $stmt->execute();
+    $res = $stmt->fetch(PDO::FETCH_OBJ);
+    if($res->mentionee == $current_user){
+      alertDelete($_GET["a"]);
+    }
+  }
+?>
+<div class="container card noHover">
+  <div id=comments>
+    <div id=commentWriter>
+        <script>
+          function getContent(){
+            document.getElementById("realText").value = document.getElementById("commentEditor").innerHTML;
+          }
+          function findPos(obj) {
+            return obj.getBoundingClientRect().top - obj.clientHeight;
+          }
+          function addToCW(text){
+            document.getElementById("commentEditor").innerHTML = document.getElementById("commentEditor").innerHTML + "@" + text + " ";
+            
+            document.getElementById("realText").value = document.getElementById("commentEditor").innerHTML;
+            
+            window.scrollBy(0, findPos(document.getElementById("commentWriter")));
+          }
+        </script>
+      <?php
+        
+        if(isset($_GET["report"])){
+          $stmt = $conn->prepare("SELECT * FROM comments WHERE id = :id");
+          $rid = $_GET["report"];
+          $stmt->bindParam(":id", $rid);
+          $stmt->execute();
+          $comment = $stmt->fetch(PDO::FETCH_OBJ);
+          $commentID = intval($comment->id);
+          if($commentID!=""){
+            $stmt = $conn->prepare("SELECT * FROM comments WHERE id = :id");
+            $stmt->bindParam(":id", $commentID);
+            $stmt->execute();
+            $return = $stmt->fetch(PDO::FETCH_OBJ);
+            $current = $return->reports;
+            if(strpos($current, $current_user) === false){
+              $new = $current.$current_user.",";
+              $stmt = $conn->prepare("UPDATE comments SET reports = :new WHERE id = :id");
+              $stmt->bindParam(":new", $new);
+              $stmt->bindParam(":id", $commentID);
+              $stmt->execute();
+              if($stmt){
+                msg("Comment reported.");
+                header("Refresh:0");
+              }else{
+                msg("Error reporting comment.");
+                header("Refresh:0");
+              }
+            }else{
+              msg("Your report has already been recorded.");
+              header("Refresh:0");
+            }
+          }
+        }
+        
+        if(isset($_GET["reply"])){
+          $name = getUserInfo($_GET["reply"])->name;
+          
+          $reply = "&reply=".$_GET["reply"];
+          $repNotif = "<p style=\"float:left;font-size:1em;margin:0.5em 0.3em;\">(Replying to $name)</p>";
+        }else{
+          $reply = $repNotif = "";
+        }
+      ?>
+      <form method=POST action=/res/commentSub.php?post=<?=$_GET["post"].$reply; ?>>
+      <div contentEditable=true id=commentEditor name=commentPsuedo placeholder="Add your ideas" onkeyup=getContent()></div>
+      <textarea id=realText name=comment style="display:none"></textarea>
+      <div id=commentWriterButtons>
+        <?=$repNotif; ?>
+        <div id=commentSubmitWrapper>
+          <p id=rulesReminder>Remember: we have <a href="/rules.php" target=_BLANK>rules</a>!</p>
+          <button id=commentSubmitButton type=submit>SUBMIT</button>
+        </div>
+      </div>
+      </form>
+    </div>
+    
+     <!-- submitted comments -->
+    <div id=submittedComments>
+    <?php
+    foreach($row as $comment){
+    $uname = getUserInfo($comment["poster_id"])->name;
+    $comment["text"] = decodeUserLink($comment["text"]);
+    $teacher = getUserInfo($comment["poster_id"])->teacher?"<i class=material-icons>school</i>":"";
+    if($comment["poster_id"] == $current_user){
+      $repDel = "<p class=commentReport><a href=?delc=".$comment["id"]."&post=".$_GET['post'].">delete</a></p>";
+    }else{
+      $repDel = "<a href=?post=".$_GET['post']."&repc=".$comment["id"]." class=commentReport>report</a>";
+    }
+    
+    if($_GET["a"]==$comment['id']){
+        $a = "current";
+        echo "<script>document.addEventListener('DOMContentLoaded',function(event) {window.scrollBy(-500,-500);});</script>";
+    }else{
+        $a = "";
+    }
+    echo "
+      <div class='comment $a'>
+      <a name=".$comment['id']."></a>
+        <div class=commentTop>
+          <p><a href=/user/?user=".$comment["poster_id"]." class=commentName> ".$uname."</a>".$teacher." <span class=commentTime>".makeDate($comment['date'])."</span></p>
+        </div>
+        <div class=commentMiddle>".hyperlink($comment['text'])."</div>
+        <div class=commentBottom>
+          ".$repDel."
+          <span class=commentReply onclick=\"addToCW('".$uname."')\">Reply</span>
+        </div>
+      </div>";
+    }
+    ?>
+    <a name=bottomOfComments></a>
+    </div>
+  </div>
+</div>
