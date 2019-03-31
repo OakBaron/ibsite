@@ -3,3 +3,4 @@ googleApi/
 forum/images/*
 deletedContent/
 .*
+!.gitignore
